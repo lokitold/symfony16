@@ -67,7 +67,7 @@ Enjoy!
 [11]: https://symfony.com/doc/3.0/cookbook/logging/monolog.html
 [13]: https://symfony.com/doc/3.0/bundles/SensioGeneratorBundle/index.html
 
-
+// configuracion en local
 <VirtualHost *:80>
    SetEnv SYMFONY_ENV dev
    ServerAdmin webmaster@localhost
@@ -80,11 +80,10 @@ Enjoy!
        Allow from all
     </Directory>
 </VirtualHost>
-
 127.0.0.1       local.symfony16.pe
 
-
 //desplegar en heroku
+    set enviroment => SYMFONY_ENV prod
     modificar Procfile => web: bin/heroku-php-apache2 web/
     agregar en composer.json =>   "config": {
                                         "bin-dir": "bin"
