@@ -87,6 +87,6 @@ Enjoy!
     modificar Procfile => web: bin/heroku-php-apache2 web/
     agregar en composer.json =>   "config": {
                                         "bin-dir": "bin"
-                                    }
+                                    } 
 
 
