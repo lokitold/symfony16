@@ -83,3 +83,11 @@ Enjoy!
 
 127.0.0.1       local.symfony16.pe
 
+
+//desplegar en heroku
+    modificar Procfile => web: bin/heroku-php-apache2 web/
+    agregar en composer.json =>   "config": {
+                                        "bin-dir": "bin"
+                                    }
+
+
