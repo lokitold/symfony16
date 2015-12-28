@@ -1,0 +1,11 @@
+route1:
+    path:     /foo
+    defaults: { _controller: 'MyController::fooAction' }
+
+route2:
+    path:     /foo/bar
+    defaults: { _controller: 'MyController::foobarAction' }
+
+route3:
+    path:     /help
+    defaults: { _controller: 'MyController::foobarAction' }

@@ -8,30 +8,36 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Config\FileLocator;
+
+use Symfony\Component\Routing;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
 
-$collection = new RouteCollection();
+
+$locator = new FileLocator(array(__DIR__.'/test/'));
+$loader = new YamlFileLoader($locator);
+$collection = $loader->load('route.yml');
 $request = Request::createFromGlobals();
-
-$collection->add('help', new Route('/help', array(
-    'controller' => 'HelpController',
-    'action' => 'indexAction'
-)));
-$collection->add('about', new Route('/about', array(
-    'controller' => 'AboutController',
-    'action' => 'indexAction'
-)));
 
 $context = new RequestContext();
 $context->fromRequest(Request::createFromGlobals());
 $matcher = new UrlMatcher($collection, $context);
 
-$request->getPathInfo();
+try {
+    $attributes = $matcher->match($request->getPathInfo());
+    print_r($attributes);
+} catch (Routing\Exception\ResourceNotFoundException $e) {
+    $response = new Response('Not Found', 404);
+    $response->send();
+} catch (Exception $e) {
+    $response = new Response('An error occurred', 500);
+    $response->send();
+}
 
-$attributes = $matcher->match($request->getPathInfo());
-
-print_r($attributes);
