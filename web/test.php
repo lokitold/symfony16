@@ -8,17 +8,30 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-
+$collection = new RouteCollection();
 $request = Request::createFromGlobals();
 
-$response = new Response();
+$collection->add('help', new Route('/help', array(
+    'controller' => 'HelpController',
+    'action' => 'indexAction'
+)));
+$collection->add('about', new Route('/about', array(
+    'controller' => 'AboutController',
+    'action' => 'indexAction'
+)));
 
-$response->setContent('<html><body><h1>Hello world!</h1></body></html>');
-$response->setStatusCode(Response::HTTP_OK);
-$response->headers->set('Content-Type', 'text/html');
+$context = new RequestContext();
+$context->fromRequest(Request::createFromGlobals());
+$matcher = new UrlMatcher($collection, $context);
 
-// prints the HTTP headers followed by the content
-$response->send();
+$request->getPathInfo();
+
+$attributes = $matcher->match($request->getPathInfo());
+
+print_r($attributes);
