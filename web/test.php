@@ -14,13 +14,13 @@ use Symfony\Component\Config\FileLocator;
 
 use Symfony\Component\Routing;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Route;
+//use Symfony\Component\Routing\RouteCollection;
+//use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
+//use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 
-
+/*
 $locator = new FileLocator(array(__DIR__.'/test/'));
 $loader = new YamlFileLoader($locator);
 $collection = $loader->load('route.yml');
@@ -40,4 +40,25 @@ try {
     $response = new Response('An error occurred', 500);
     $response->send();
 }
+*/
 
+$locator = new FileLocator(array(__DIR__.'/test/'));
+$request = Request::createFromGlobals();
+$requestContext = new RequestContext($request);
+$router = new Router(
+    new YamlFileLoader($locator),
+    'route.yml',
+    array('cache_dir' => __DIR__.'/test/cache/'),
+    $requestContext
+);
+try {
+    $attributes = $router->match($request->getPathInfo());
+    print_r($attributes);
+} catch (Routing\Exception\ResourceNotFoundException $e) {
+    $response = new Response('Not Found', 404);
+    $response->send();
+} catch (Exception $e) {
+    //print_r($e);
+    $response = new Response('An error occurred', 500);
+    $response->send();
+}
