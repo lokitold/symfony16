@@ -1,6 +1,7 @@
 <?php
 
-echo "aca";exit;
+require __DIR__.'/../vendor/autoload.php';
+
 $input = [
     'emails' => [
         7 => 'david@panmedia.co.nz',
