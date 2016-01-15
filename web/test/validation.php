@@ -1,5 +1,6 @@
 <?php
 
+echo "aca";exit;
 $input = [
     'emails' => [
         7 => 'david@panmedia.co.nz',
