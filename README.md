@@ -89,5 +89,14 @@ Enjoy!
                                         "bin-dir": "bin"
                                     }
 
+// Agregar en el gitignore
+/.idea
+/.idea/
+/.idea/*
+.idea
+
+//para el despliegue automatico solamente se necesita enlazarlo desde el dashboard de heroku
+
+
 
  
