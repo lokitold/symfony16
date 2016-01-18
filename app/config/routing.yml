@@ -3,7 +3,7 @@ app:
     type:     annotation
 
 blog:
-    path:      /blog
+    path:      /test
     defaults:  { _controller: 'AppBundle:Default:test'}
 
 acme_demo_user_all:

@@ -21,6 +21,6 @@ class DefaultController extends Controller
 
     public function testAction(Request $request)
     {
-        echo "aca";exit;
+        return $this->render('test/test.html.twig');
     }
 }
