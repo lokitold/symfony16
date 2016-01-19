@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/tests", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function index2Action(Request $request)
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(
@@ -20,10 +20,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/tests", name="test")
+     * @Route("/", name="test")
      */
 
-    public function testAction(Request $request)
+    public function indexAction(Request $request)
     {
 
         $this->data['blog_entries']= array(
