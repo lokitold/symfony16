@@ -20,7 +20,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/tests", name="test")
      */
 
     public function testAction(Request $request)
