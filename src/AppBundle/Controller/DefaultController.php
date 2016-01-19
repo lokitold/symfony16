@@ -33,6 +33,6 @@ class DefaultController extends Controller
           )
         );
 
-        return $this->render('AppBundle:default:test.html.twig',$this->data);
+        return $this->render('AppBundle:default:index.html.twig',$this->data);
     }
 }
