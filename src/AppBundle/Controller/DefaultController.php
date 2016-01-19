@@ -25,6 +25,14 @@ class DefaultController extends Controller
 
     public function testAction(Request $request)
     {
-        return $this->render('AppBundle:default:test.html.twig');
+
+        $this->data['blog_entries']= array(
+          array(
+              'title'=> '1',
+              'body' => 'adsad'
+          )
+        );
+
+        return $this->render('AppBundle:default:test.html.twig',$this->data);
     }
 }
