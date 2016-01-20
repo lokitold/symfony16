@@ -26,13 +26,6 @@ class BlogController  extends Controller
         return $this->render('AcmeBlogBundle:Blog:list.html.php', array('posts' => $posts));
     }
 
-    /*
-     *
-     * blog_show:
-    path:     /blog/show/{id}
-    defaults: { _controller: AcmeBlogBundle:Blog:show }
-     * */
-
     /**
      * @Route("/blog/show/{id}", name="blogshow")
      */
