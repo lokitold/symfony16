@@ -26,6 +26,20 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 
+        $session = $request->getSession();
+
+        // guarda un atributo para reutilizarlo durante una
+        // petición posterior del usuario
+        $session->set('foo', 'bar');
+
+        // obtener el valor de un atributo de la sesión
+        $foo = $session->get('foo');
+        print_r($foo);
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+
+
         $this->data['blog_entries']= array(
           array(
               'title'=> '1',
