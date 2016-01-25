@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -49,4 +50,25 @@ class DefaultController extends Controller
 
         return $this->render('AppBundle:default:index.html.twig',$this->data);
     }
+
+
+    /**
+     * @Route("/doctrine", name="doctrine")
+     */
+
+    public function doctrineAction(Request $request)
+    {
+        $product = new Product();
+        $product->setName('A Foo Bar');
+        $product->setPrice('19.99');
+        $product->setDescription('Lorem ipsum dolor');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($product);
+        $em->flush();
+
+        return new Response('Created product id '.$product->getId());
+    }
+
 }
