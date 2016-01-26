@@ -45,4 +45,15 @@ class BlogController  extends Controller
 
         return $this->render('AcmeBlogBundle:Blog:show.html.php', array('post' => $post));*/
     }
+
+    /**
+     * @Route("/login", name="loginGet")
+     */
+
+    public function loginAction()
+    {   
+
+        $data = array();
+        return $this->render('AppBundle:blog:login.html.twig', array('data' => $data));
+    }
 }
