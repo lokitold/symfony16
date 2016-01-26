@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Product;
 
 
 class BlogController  extends Controller
@@ -54,6 +55,7 @@ class BlogController  extends Controller
     {   
 
         $data = array();
+
         return $this->render('AppBundle:blog:login.html.twig', array('data' => $data));
     }
 }
