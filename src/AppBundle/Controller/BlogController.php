@@ -58,4 +58,17 @@ class BlogController  extends Controller
 
         return $this->render('AppBundle:blog:login.html.twig', array('data' => $data));
     }
+
+
+    /**
+     * @Route("/testblog", name="testblog")
+     */
+
+    public function testblogAction()
+    {   
+
+        $data = array();
+
+        return $this->render('AppBundle:blog:testblog.html.twig', array('data' => $data));
+    }
 }
