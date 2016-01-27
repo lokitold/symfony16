@@ -68,7 +68,7 @@ class BlogController  extends Controller
      * @Route("/testblog", name="testblog")
      */
 
-    public function testblogAction()
+    public function testblogAction(Request $request)
     {   
 
         $data = array();
@@ -82,7 +82,18 @@ class BlogController  extends Controller
             ->add('task', TextType::class)
             ->add('dueDate', DateType::class)
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
+            ->add('saveAndAdd', SubmitType::class, array('label' => 'Save and Add'))
             ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // ... perform some action, such as saving the task to the database
+
+            $nextAction = $form->get('saveAndAdd')->isClicked() ? 'task_new' : 'task_success';
+
+            return $this->redirectToRoute($nextAction);
+        }
 
         return $this->render('AppBundle:blog:testblog.html.twig', array(
             'data' => $data,

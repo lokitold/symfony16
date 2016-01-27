@@ -1,13 +1,21 @@
 <?php
 
 namespace AppBundle\Entity;
- 
+
+
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Task
 {
-    // descripción de la tarea
+    /**
+     * @Assert\NotBlank()
+     */
     protected $task;
  
-    // fecha en la que debe estar completada
+     /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     */
     protected $dueDate;
  
     public function getTask()
