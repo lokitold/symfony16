@@ -13,6 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Task;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class BlogController  extends Controller
@@ -69,6 +73,20 @@ class BlogController  extends Controller
 
         $data = array();
 
-        return $this->render('AppBundle:blog:testblog.html.twig', array('data' => $data));
+        // crea una task y le asigna algunos datos ficticios para este ejemplo
+        $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate(new \DateTime('tomorrow'));
+ 
+        $form = $this->createFormBuilder($task)
+            ->add('task', TextType::class)
+            ->add('dueDate', DateType::class)
+            ->add('save', SubmitType::class, array('label' => 'Create Task'))
+            ->getForm();
+
+        return $this->render('AppBundle:blog:testblog.html.twig', array(
+            'data' => $data,
+            'form' => $form->createView()
+        ));
     }
 }
