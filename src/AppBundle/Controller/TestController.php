@@ -83,4 +83,20 @@ class TestController extends Controller
         // ... do something, like pass the $product object into a template
     }
 
+    /**
+     * @Route("/test-repository", name="test-repository")
+     */
+
+    public function testRepositoryAction(Request $request)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('AppBundle:Post');
+
+        $post = $repository->findAll();
+        echo "<pre>";
+        print_r($post);
+        echo "</pre>";exit;
+
+    }
+
 }
