@@ -99,4 +99,48 @@ class TestController extends Controller
 
     }
 
+    /**
+     * @Route("/product/update/{id}", name="blogshow")
+     */
+
+    public function updateAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository('AppBundle:Product')->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $product->setName('New product name!');
+        $em->flush();
+
+        return new Response('Update product id '.$product->getId());
+    }
+
+    /**
+     * @Route("/test-query-raw", name="test-query-raw")
+     */
+
+    public function testQueryRawAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT p
+    FROM AppBundle:Product p
+    WHERE p.price > :price
+    ORDER BY p.price ASC'
+        )->setParameter('price', '19.00');
+
+        $products = $query->getResult();
+
+        echo "<pre>";
+        print_r($products);
+        echo "</pre>";exit;
+
+    }
+
+
 }
