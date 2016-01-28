@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Category;
 
 class TestController extends Controller
 {
@@ -43,6 +44,20 @@ class TestController extends Controller
         $em->persist($post);
         $em->flush();
         return new Response('Created post id '.$post->getId());
+    }
+
+    /**
+     * @Route("/create-category", name="create-category")
+     */
+
+    public function createCategoryAction(Request $request)
+    {
+        $post = new Category();
+        $post->setName('Nueva Categoria');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
+        return new Response('Created category id '.$post->getId());
     }
 
 }
