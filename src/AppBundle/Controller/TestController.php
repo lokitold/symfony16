@@ -60,4 +60,27 @@ class TestController extends Controller
         return new Response('Created category id '.$post->getId());
     }
 
+    /**
+     * @Route("/blog/show/{id}", name="blogshow")
+     */
+
+    public function showAction($id)
+    {
+        $post = $this->getDoctrine()
+            ->getRepository('AppBundle:Post')
+            ->find($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException(
+                'No post found for id '.$id
+            );
+        }
+
+        echo "<pre>";
+        print_r($post);
+        echo "</pre>";exit;
+
+        // ... do something, like pass the $product object into a template
+    }
+
 }

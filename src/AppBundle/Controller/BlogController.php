@@ -32,26 +32,6 @@ class BlogController  extends Controller
     }
 
     /**
-     * @Route("/blog/show/{id}", name="blogshow")
-     */
-
-    public function showAction($id)
-    {
-        return new Response($id);
-        /*$post = $this->get('doctrine')
-            ->getManager()
-            ->getRepository('AcmeBlogBundle:Post')
-            ->find($id);
-
-        if (!$post) {
-            // hace que se muestre la página de error 404
-            throw $this->createNotFoundException();
-        }
-
-        return $this->render('AcmeBlogBundle:Blog:show.html.php', array('post' => $post));*/
-    }
-
-    /**
      * @Route("/login", name="loginGet")
      */
 
