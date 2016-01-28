@@ -62,4 +62,14 @@ class Category
     {
         return $this->name;
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    protected $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }

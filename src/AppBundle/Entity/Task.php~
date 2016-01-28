@@ -15,6 +15,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Task
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @Assert\NotBlank()
      */
     protected $task;
