@@ -7,8 +7,9 @@ use AppBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Post;
 
-class DefaultController extends Controller
+class TestController extends Controller
 {
 
     /**
@@ -36,17 +37,12 @@ class DefaultController extends Controller
 
     public function createBlogAction(Request $request)
     {
-        $product = new Product();
-        $product->setName('A Foo Bar');
-        $product->setPrice('19.99');
-        $product->setDescription('Lorem ipsum dolor');
-
+        $post = new Post();
+        $post->setDescription('Nuevo post');
         $em = $this->getDoctrine()->getManager();
-
-        $em->persist($product);
+        $em->persist($post);
         $em->flush();
-
-        return new Response('Created product id '.$product->getId());
+        return new Response('Created post id '.$post->getId());
     }
 
 }
