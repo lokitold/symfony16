@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Category;
 
-class TestController extends Controller
+class TestDoctrineController extends Controller
 {
 
     /**
@@ -140,6 +140,19 @@ class TestController extends Controller
         print_r($products);
         echo "</pre>";exit;
 
+    }
+
+    /**
+     * @Route("/test-doctrine-repository", name="test-doctrine-repository")
+     */
+
+    public function testQueryDoctrineRepository (){
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('AppBundle:Product')
+            ->findAllOrderedByName();
+        echo "<pre>";
+        print_r($products);
+        echo "</pre>";exit;
     }
 
 
