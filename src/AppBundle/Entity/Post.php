@@ -31,10 +31,9 @@ class Post
     /**
      * @var int
      *
-     * @ORM\Column(name="category", type="integer")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
      */
     private $category;
-
 
     /**
      * Get id
@@ -69,29 +68,6 @@ class Post
     {
         return $this->description;
     }
-
-    /**
-     * Set category
-     *
-     * @param integer $category
-     *
-     * @return Post
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return int
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
+    
 }
 
