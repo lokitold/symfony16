@@ -155,5 +155,29 @@ class TestDoctrineController extends Controller
         echo "</pre>";exit;
     }
 
+    /**
+     * @Route("/show-products", name="show-products")
+     */
+
+    public function showProductsAction()
+    {
+        $id = 2;
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('AppBundle:Category')->find($id);
+
+        echo "<pre>";
+        print_r($category);
+        echo "</pre>";exit;
+
+        $products = $category->getProducts();
+
+        foreach($products as $prod):
+            echo "<pre>";
+            print_r($prod);
+            echo "</pre>";
+        endforeach;
+        exit;
+    }
+
 
 }
