@@ -64,13 +64,13 @@ class Category
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
      */
-    protected $products;
+    protected $posts;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     /**
@@ -105,5 +105,39 @@ class Category
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Add post
+     *
+     * @param \AppBundle\Entity\Product $post
+     *
+     * @return Category
+     */
+    public function addPost(\AppBundle\Entity\Product $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \AppBundle\Entity\Product $post
+     */
+    public function removePost(\AppBundle\Entity\Product $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

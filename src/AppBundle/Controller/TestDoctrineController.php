@@ -164,24 +164,16 @@ class TestDoctrineController extends Controller
         $id = 2;
 
         $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository('AppBundle:Product')->find($id);
+        $category = $em->getRepository('AppBundle:Category')->find($id);
 
-        echo "<pre>";
-        print_r($product->getId());
-        echo "</pre>";exit;
+        $posts = $category->getPosts();
 
-
-        /*$category = $em->getRepository('AppBundle:Category')->find($id);
-
-
-        $products = $category->getProducts();
-
-        foreach($products as $prod):
+        foreach($posts as $po):
             echo "<pre>";
-            print_r($prod);
+            print_r($po->getId());
             echo "</pre>";
         endforeach;
-        exit;*/
+
     }
 
 
