@@ -162,12 +162,17 @@ class TestDoctrineController extends Controller
     public function showProductsAction()
     {
         $id = 2;
+
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('AppBundle:Category')->find($id);
+        $product = $em->getRepository('AppBundle:Product')->find($id);
 
         echo "<pre>";
-        print_r($category);
+        print_r($product->getId());
         echo "</pre>";exit;
+
+
+        /*$category = $em->getRepository('AppBundle:Category')->find($id);
+
 
         $products = $category->getProducts();
 
@@ -176,7 +181,7 @@ class TestDoctrineController extends Controller
             print_r($prod);
             echo "</pre>";
         endforeach;
-        exit;
+        exit;*/
     }
 
 
