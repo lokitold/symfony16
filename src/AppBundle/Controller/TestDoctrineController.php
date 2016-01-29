@@ -172,7 +172,7 @@ class TestDoctrineController extends Controller
             echo "<pre>";
             print_r($po->getId());
             echo "</pre>";
-        endforeach;
+        endforeach;exit;
 
     }
 
