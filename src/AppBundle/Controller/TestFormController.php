@@ -32,6 +32,16 @@ class TestFormController extends Controller
             ->add('save', SubmitType::class, array('label' => 'Create Category'))
             ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // ... perform some action, such as saving the task to the database
+            echo "<pre>";
+            print_r($request);
+            echo "</pre>";exit;
+            return $this->redirectToRoute('task_success');
+        }
+
         return $this->render('AppBundle:test-form:new.html.twig', array(
             'form' => $form->createView(),
         ));
