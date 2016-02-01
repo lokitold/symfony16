@@ -52,4 +52,14 @@ class Task
     {
         $this->dueDate = $dueDate;
     }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
