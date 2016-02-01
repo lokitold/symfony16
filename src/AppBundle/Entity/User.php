@@ -11,7 +11,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Table(name="app_users")
@@ -30,6 +32,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=64)
