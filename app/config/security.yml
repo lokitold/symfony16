@@ -13,6 +13,12 @@ security:
                     ryan:
                         password: ryanpass
                         roles: 'ROLE_USER'
+        our_db_provider:
+            entity:
+                class: AppBundle:User
+                property: username
+                #if you're using multiple entity managers
+                manager_name: customer
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -29,9 +35,12 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+            #provider: our_db_provider
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/admin, roles: ROLE_ADMIN }
     encoders:
         AppBundle\Entity\User:
             algorithm: bcrypt
+        Symfony\Component\Security\Core\User\User: plaintext
