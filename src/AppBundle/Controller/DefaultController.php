@@ -52,4 +52,12 @@ class DefaultController extends Controller
         return $this->render('AppBundle:default:index.html.twig',$this->data);
     }
 
+    /**
+     * @Route("/admin")
+     */
+    public function adminAction()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
+
 }
