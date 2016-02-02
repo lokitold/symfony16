@@ -41,6 +41,7 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/box , roles: ROLE_USER}
     encoders:
         AppBundle\Entity\User:
             algorithm: bcrypt
