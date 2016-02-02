@@ -27,7 +27,7 @@ class DefaultController extends Controller
 
     public function indexAction(Request $request)
     {
-        
+
         $this->data['blog_entries']= array(
           array(
               'title'=> '1',
