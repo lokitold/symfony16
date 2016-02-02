@@ -32,19 +32,6 @@ class BlogController  extends Controller
     }
 
     /**
-     * @Route("/login", name="loginGet")
-     */
-
-    public function loginAction()
-    {   
-
-        $data = array();
-
-        return $this->render('AppBundle:blog:login.html.twig', array('data' => $data));
-    }
-
-
-    /**
      * @Route("/testblog", name="testblog")
      */
 

@@ -68,4 +68,12 @@ class DefaultController extends Controller
         return new Response('<html><body>Box page!</body></html>');
     }
 
+    /**
+     * @Route("/box/test")
+     */
+    public function boxtestAction()
+    {
+        return new Response('<html><body>Box page test!</body></html>');
+    }
+
 }
