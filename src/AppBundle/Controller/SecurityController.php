@@ -6,11 +6,14 @@
  * Time: 12:38 PM
  */
 
+namespace AppBundle\Controller;
+
 // src/AppBundle/Controller/SecurityController.php
 
 // ...
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SecurityController extends Controller
 {
