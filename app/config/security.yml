@@ -18,7 +18,7 @@ security:
                 class: AppBundle:User
                 property: username
                 #if you're using multiple entity managers
-                manager_name: customer
+                #manager_name: customer
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
