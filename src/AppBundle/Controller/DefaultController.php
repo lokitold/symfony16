@@ -39,14 +39,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin")
-     */
-    public function adminAction()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
-    }
-
-    /**
      * @Route("/box")
      */
     public function boxAction()
