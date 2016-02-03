@@ -15,8 +15,11 @@ class DashboardController extends Controller
      */
     public function adminAction()
     {
+        # get username
+        $username = $this->getUser()->getUsername();
+        $this->data['username']= $username;
 
-        $this->data['test']= '';
+
 
         return $this->render('AppBundle:dashboard:index.html.twig',$this->data);
     }
