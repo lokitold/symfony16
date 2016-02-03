@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Form\CategoryType;
 
 class PostType extends AbstractType
 {
@@ -16,7 +17,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('description')
-            ->add('category')
+            ->add('category', CategoryType::class)
         ;
     }
     
