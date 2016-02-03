@@ -22,7 +22,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/tests", name="test")
      */
 
     public function indexAction(Request $request)
