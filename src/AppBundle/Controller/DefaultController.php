@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/tests", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function index2Action(Request $request)
     {
@@ -22,7 +22,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/", name="test")
+     * @Route("/test", name="test")
      */
 
     public function indexAction(Request $request)
