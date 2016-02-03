@@ -6,4 +6,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AppBundle extends Bundle
 {
+    public function boot()
+    {
+        $fooBar = 'foobar';
+        $this->container->get('twig')->addGlobal('foo_bar', $fooBar);
+    }
 }
