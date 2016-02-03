@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Form\CategoryType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PostType extends AbstractType
 {
@@ -17,7 +18,11 @@ class PostType extends AbstractType
     {
         $builder
             ->add('description')
-            ->add('category', CategoryType::class)
+            //->add('category', CategoryType::class)
+            ->add('category',  EntityType::class, array(
+                'class' => 'AppBundle:Category',
+                'choice_label' => 'name',
+            ))
         ;
     }
     
