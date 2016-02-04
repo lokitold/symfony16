@@ -60,7 +60,7 @@ class Post
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = 1;
 
     /**
      * @var int

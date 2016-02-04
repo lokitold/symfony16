@@ -60,7 +60,7 @@ class Post
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = 1;
 
     /**
      * @var int
@@ -69,6 +69,21 @@ class Post
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+
+
+    public function __construct()
+    {
+        $this->created_at= new \DateTime();
+        $this->updated_at= new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updated_at= new \DateTime();
+    }
 
     /**
      * Get id
@@ -127,26 +142,6 @@ class Post
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * Gets triggered only on insert
-
-     * @ORM\PrePersist
-     */
-    public function onPrePersist()
-    {
-        $this->created_at = new \DateTime("now");
-    }
-
-    /**
-     * Gets triggered every time on update
-
-     * @ORM\PreUpdate
-     */
-    public function onPreUpdate()
-    {
-        $this->updated_at = new \DateTime("now");
     }
 
     /**
