@@ -24,14 +24,14 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255)
+     * @ORM\Column(name="titulo", type="string", length=255 , nullable=true)
      */
     private $titulo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sub_titulo", type="string", length=255)
+     * @ORM\Column(name="sub_titulo", type="string", length=255 , nullable=true)
      */
     private $sub_titulo;
 
@@ -147,5 +147,125 @@ class Post
     public function onPreUpdate()
     {
         $this->updated_at = new \DateTime("now");
+    }
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     *
+     * @return Post
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set subTitulo
+     *
+     * @param string $subTitulo
+     *
+     * @return Post
+     */
+    public function setSubTitulo($subTitulo)
+    {
+        $this->sub_titulo = $subTitulo;
+
+        return $this;
+    }
+
+    /**
+     * Get subTitulo
+     *
+     * @return string
+     */
+    public function getSubTitulo()
+    {
+        return $this->sub_titulo;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Post
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Post
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Post
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

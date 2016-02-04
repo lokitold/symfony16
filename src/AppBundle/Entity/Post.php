@@ -24,14 +24,14 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255)
+     * @ORM\Column(name="titulo", type="string", length=255 , nullable=true)
      */
     private $titulo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sub_titulo", type="string", length=255)
+     * @ORM\Column(name="sub_titulo", type="string", length=255 , nullable=true)
      */
     private $sub_titulo;
 
