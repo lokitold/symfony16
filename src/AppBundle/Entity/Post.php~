@@ -24,9 +24,43 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="titulo", type="string", length=255)
+     */
+    private $titulo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sub_titulo", type="string", length=255)
+     */
+    private $sub_titulo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text" )
      */
     private $description;
+
+    /**
+     * @var date $created_at
+     *
+     * @ORM\Column(name="created_at", type="date", nullable=true)
+     */
+    private $created_at;
+
+    /**
+     * @var date $update_at
+     *
+     * @ORM\Column(name="updated_at", type="date", nullable=true)
+     */
+    private $updated_at;
+
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     /**
      * @var int
@@ -93,5 +127,25 @@ class Post
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime("now");
     }
 }
