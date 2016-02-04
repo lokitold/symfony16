@@ -5,7 +5,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Form\CategoryType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PostType extends AbstractType
@@ -17,8 +16,12 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('titulo')
+            ->add('sub_titulo')
             ->add('description')
-            //->add('category', CategoryType::class)
+            //->add('created_at', 'date')
+            //->add('updated_at', 'date')
+            ->add('isActive')
             ->add('category',  EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'choice_label' => 'name',
