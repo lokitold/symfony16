@@ -21,15 +21,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BlogController  extends Controller
 {
-    public function listAction()
-    {
-        $posts = $this->get('doctrine')
-            ->getManager()
-            ->createQuery('SELECT p FROM AcmeBlogBundle:Post p')
-            ->execute();
-
-        return $this->render('AcmeBlogBundle:Blog:list.html.php', array('posts' => $posts));
-    }
 
     /**
      * @Route("/testblog", name="testblog")

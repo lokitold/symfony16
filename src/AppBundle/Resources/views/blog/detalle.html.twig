@@ -1,0 +1,39 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+
+{% block body %}
+    <h1>Post</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ post.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ post.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Sub_titulo</th>
+                <td>{{ post.subtitulo }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ post.description }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{% if post.createdat %}{{ post.createdat|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{% if post.updatedat %}{{ post.updatedat|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isactive</th>
+                <td>{% if post.isActive %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

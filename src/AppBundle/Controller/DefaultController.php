@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use AppBundle\Entity\Post;
+
 
 class DefaultController extends Controller
 {
@@ -42,6 +44,16 @@ class DefaultController extends Controller
         );
 
         return $this->render('AppBundle:default:index.html.twig',$this->data);
+    }
+
+    /**
+     * @Route("blog/{id}", name="blog_detalle")
+     */
+    public function showAction(Post $post)
+    {
+        return $this->render('AppBundle:blog:detalle.html.twig', array(
+            'post' => $post,
+        ));
     }
 
     /**
