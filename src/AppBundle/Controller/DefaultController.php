@@ -7,6 +7,7 @@ use AppBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class DefaultController extends Controller
 {
@@ -27,6 +28,11 @@ class DefaultController extends Controller
 
     public function indexAction(Request $request)
     {
+
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository('AppBundle:Post')->findAll();
+
+        $this->data['posts'] = $posts;
 
         $this->data['blog_entries']= array(
           array(
