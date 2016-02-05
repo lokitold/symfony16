@@ -34,7 +34,15 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository('AppBundle:Post')->findAll();
 
-        $this->data['posts'] = $posts;
+        #
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $posts,
+            $request->query->getInt('page', 1),6
+        );
+        #
+
+        $this->data['posts'] = $pagination;
 
         $this->data['blog_entries']= array(
           array(
