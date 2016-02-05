@@ -1,39 +1,33 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block title %}{{ post.titulo }}{% endblock %}
+
+{% block header %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/clean-blog/img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ post.titulo }}</h1>
+                        <h2 class="subheading">{{ post.subtitulo }}</h2>
+                        <span class="meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2014</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
 
 {% block body %}
-    <h1>Post</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Titulo</th>
-                <td>{{ post.titulo }}</td>
-            </tr>
-            <tr>
-                <th>Sub_titulo</th>
-                <td>{{ post.subtitulo }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ post.description }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{% if post.createdat %}{{ post.createdat|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{% if post.updatedat %}{{ post.updatedat|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Isactive</th>
-                <td>{% if post.isActive %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ post.description }}
+                </div>
+            </div>
+        </div>
+    </article>
 {% endblock %}
