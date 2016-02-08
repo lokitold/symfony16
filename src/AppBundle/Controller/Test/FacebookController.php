@@ -33,7 +33,11 @@ class FacebookController extends Controller
         $loginUrl = $helper->getLoginUrl('http://local.symfony16.pe/app_dev.php/fb-callback', $permissions);
 
         ##correction bug
-        foreach ($_SESSION as $k=>$v) {
+        #if(!isset($_SESSION))
+        #{
+        #    session_start();
+        #}
+        /*foreach ($_SESSION as $k=>$v) {
             if(strpos($k, "FBRLH_")!==FALSE) {
                 if(!setcookie($k, $v)) {
                     //what??
@@ -41,7 +45,7 @@ class FacebookController extends Controller
                     $_COOKIE[$k]=$v;
                 }
             }
-        }
+        }*/
 
         $enlaceFacebook = '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 
@@ -60,11 +64,11 @@ class FacebookController extends Controller
     {
 
         #correction bug
-        foreach ($_COOKIE as $k=>$v) {
-            if(strpos($k, "FBRLH_")!==FALSE) {
-                $_SESSION[$k]=$v;
-            }
-        }
+        #foreach ($_COOKIE as $k=>$v) {
+        #    if(strpos($k, "FBRLH_")!==FALSE) {
+        #        $_SESSION[$k]=$v;
+        #    }
+        #}
 
         $fb = new Facebook([
             'app_id' => '537579346410151',
