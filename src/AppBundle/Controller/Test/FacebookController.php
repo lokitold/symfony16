@@ -15,11 +15,16 @@ use Facebook\Exceptions\FacebookResponseException;
 
 class FacebookController extends Controller
 {
+
     /**
      * @Route("/facebook", name="facebook")
      */
     public function index2Action(Request $request)
     {
+        #validar que session este inicializado
+        if(!session_id()) {
+            session_start();
+        }
 
         $fb = new Facebook([
             'app_id' => '537579346410151',
@@ -31,21 +36,6 @@ class FacebookController extends Controller
 
         $permissions = ['email']; // Optional permissions
         $loginUrl = $helper->getLoginUrl('http://local.symfony16.pe/app_dev.php/fb-callback', $permissions);
-
-        ##correction bug
-        #if(!isset($_SESSION))
-        #{
-        #    session_start();
-        #}
-        /*foreach ($_SESSION as $k=>$v) {
-            if(strpos($k, "FBRLH_")!==FALSE) {
-                if(!setcookie($k, $v)) {
-                    //what??
-                } else {
-                    $_COOKIE[$k]=$v;
-                }
-            }
-        }*/
 
         $enlaceFacebook = '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 
@@ -62,13 +52,10 @@ class FacebookController extends Controller
      */
     public function callbackAction(Request $request)
     {
-
-        #correction bug
-        #foreach ($_COOKIE as $k=>$v) {
-        #    if(strpos($k, "FBRLH_")!==FALSE) {
-        #        $_SESSION[$k]=$v;
-        #    }
-        #}
+        #validar que session este inicializado
+        if(!session_id()) {
+            session_start();
+        }
 
         $fb = new Facebook([
             'app_id' => '537579346410151',
