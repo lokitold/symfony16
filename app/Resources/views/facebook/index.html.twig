@@ -3,9 +3,17 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-            <div class="sf-toolbar">
-                {{ enlaceFacebook | raw  }}
-            </div>
+            <label class="sf-toolbar">
+                {% if user %}
+                    <br>{{ user.name  }}
+                    <br>{{ user.email  }}
+                    <br>
+                    <div id="logout">
+                        <label><a href="{{ path('logout-user') }}">Logout</a></label>
+                    </div>
+                {% else %}
+                    {{ enlaceFacebook | raw  }}
+                {% endif %}
             <div id="welcome">
                 <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
             </div>
@@ -47,6 +55,13 @@
 
         </div>
     </div>
+    <script type="text/javascript">
+        if (window.location.hash == '#_=_'){
+            history.replaceState
+                    ? history.replaceState(null, null, window.location.href.split('#')[0])
+                    : window.location.hash = '';
+        }
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
@@ -76,4 +91,11 @@
         .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
     }
 </style>
+<style>
+    #logout {
+        position:relative;
+        float:right;
+    }
+</style>
 {% endblock %}
+

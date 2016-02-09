@@ -11,6 +11,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use AppBundle\Entity\Post;
 use Facebook\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class FacebookController extends Controller
@@ -21,7 +22,6 @@ class FacebookController extends Controller
      */
     public function index2Action(Request $request)
     {
-
 
         $host = 'http://'.$request->getHost();
         if ( $this->container->get( 'kernel' )->getEnvironment() == 'dev' ):
@@ -48,11 +48,34 @@ class FacebookController extends Controller
 
         $enlaceFacebook = '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 
+        #obtener datos si esta logeado
+        $user = null;
+        if(!empty($_SESSION['fb_access_token'])):
+            $fb = new Facebook([
+                'app_id' => '537579346410151',
+                'app_secret' => '8967e3e0877c51297ecf269773928a29',
+                'default_graph_version' => 'v2.5',
+            ]);
+
+            try {
+                // Returns a `Facebook\FacebookResponse` object
+                $response = $fb->get('/me?fields=id,name,email', $_SESSION['fb_access_token']);
+            } catch(FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch(FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
+            $user = $response->getGraphUser();
+        endif;
+
 
         // replace this example code with whatever you need
         return $this->render('facebook/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..'),
-            'enlaceFacebook' => $enlaceFacebook
+            'enlaceFacebook' => $enlaceFacebook,
+            'user' => $user
         ));
     }
 
@@ -132,6 +155,8 @@ class FacebookController extends Controller
         }
 
         $_SESSION['fb_access_token'] = (string)$accessToken;
+        $session = new Session();
+        $session->set('fb_access_token', (string)$accessToken);
 
 
 
@@ -153,13 +178,65 @@ class FacebookController extends Controller
         echo '<br><br>Name: ' . $user['name'];
         echo '<br><br>Email: ' . $user['email'];
 
+        // User is logged in with a long-lived access token.
+        // You can redirect them to a members-only page.
+        //header('Location: https://example.com/members.php');
+        //echo $this->generateUrl('loged');exit;
+        return $this->redirect($this->generateUrl('facebook'));
+
+    }
+
+    /**
+     * @Route("/loged", name="loged")
+     */
+    public function logedAction(Request $request)
+    {
+        if(!empty($_SESSION['fb_access_token'])):
+            $fb = new Facebook([
+                'app_id' => '537579346410151',
+                'app_secret' => '8967e3e0877c51297ecf269773928a29',
+                'default_graph_version' => 'v2.5',
+            ]);
+
+            try {
+                // Returns a `Facebook\FacebookResponse` object
+                $response = $fb->get('/me?fields=id,name,email', $_SESSION['fb_access_token']);
+            } catch(FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch(FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
+
+            $user = $response->getGraphUser();
+
+            echo '<br><br>Name: ' . $user['name'];
+            echo '<br><br>Email: ' . $user['email'];
+
+        else:
+            echo "deslogeado";
+        endif;
+
+
 
         exit;
-// User is logged in with a long-lived access token.
-// You can redirect them to a members-only page.
-//header('Location: https://example.com/members.php');*/
+    }
+
+    /**
+     * @Route("/logout-user", name="logout-user")
+     */
+
+    public function logout(){
+
+        $session = new Session();
+        $session->remove('fb_access_token');
+        unset($_SESSION['fb_access_token']);
+
+        return $this->redirect($this->generateUrl('facebook'));
 
     }
 
 
-}
+
+    }
