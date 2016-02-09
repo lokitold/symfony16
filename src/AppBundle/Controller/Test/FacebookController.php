@@ -36,8 +36,8 @@ class FacebookController extends Controller
         }
 
         $fb = new Facebook([
-            'app_id' => '537579346410151',
-            'app_secret' => '8967e3e0877c51297ecf269773928a29',
+            'app_id' => '460859080767262',
+            'app_secret' => '69915f389cdfa981be8dfb98276cbaf2',
             'default_graph_version' => 'v2.5',
         ]);
 
@@ -52,8 +52,8 @@ class FacebookController extends Controller
         $user = null;
         if(!empty($_SESSION['fb_access_token'])):
             $fb = new Facebook([
-                'app_id' => '537579346410151',
-                'app_secret' => '8967e3e0877c51297ecf269773928a29',
+                'app_id' => '460859080767262',
+                'app_secret' => '69915f389cdfa981be8dfb98276cbaf2',
                 'default_graph_version' => 'v2.5',
             ]);
 
@@ -90,8 +90,8 @@ class FacebookController extends Controller
         }
 
         $fb = new Facebook([
-            'app_id' => '537579346410151',
-            'app_secret' => '8967e3e0877c51297ecf269773928a29',
+            'app_id' => '460859080767262',
+            'app_secret' => '69915f389cdfa981be8dfb98276cbaf2',
             'default_graph_version' => 'v2.5',
         ]);
 
@@ -136,7 +136,7 @@ class FacebookController extends Controller
         var_dump($tokenMetadata);
 
         // Validation (these will throw FacebookSDKException's when they fail)
-        $tokenMetadata->validateAppId('537579346410151'); // Replace {app-id} with your app id
+        $tokenMetadata->validateAppId('460859080767262'); // Replace {app-id} with your app id
         // If you know the user ID this access token belongs to, you can validate it here
         //$tokenMetadata->validateUserId('123');
         $tokenMetadata->validateExpiration();
