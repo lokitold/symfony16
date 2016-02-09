@@ -21,6 +21,15 @@ class FacebookController extends Controller
      */
     public function index2Action(Request $request)
     {
+
+
+        $host = 'http://'.$request->getHost();
+        if ( $this->container->get( 'kernel' )->getEnvironment() == 'dev' ):
+            $host .= '/app_dev.php';
+        endif;
+
+
+
         #validar que session este inicializado
         if(!session_id()) {
             session_start();
@@ -35,7 +44,7 @@ class FacebookController extends Controller
         $helper = $fb->getRedirectLoginHelper();
 
         $permissions = ['email']; // Optional permissions
-        $loginUrl = $helper->getLoginUrl('http://local.symfony16.pe/app_dev.php/fb-callback', $permissions);
+        $loginUrl = $helper->getLoginUrl("$host/fb-callback", $permissions);
 
         $enlaceFacebook = '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 
@@ -123,6 +132,27 @@ class FacebookController extends Controller
         }
 
         $_SESSION['fb_access_token'] = (string)$accessToken;
+
+
+
+
+        #get info user
+        try {
+            // Returns a `Facebook\FacebookResponse` object
+            $response = $fb->get('/me?fields=id,name', $accessToken);
+        } catch(FacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch(FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+
+        $user = $response->getGraphUser();
+
+        echo 'Name: ' . $user['name'];
+
+
         exit;
 // User is logged in with a long-lived access token.
 // You can redirect them to a members-only page.
